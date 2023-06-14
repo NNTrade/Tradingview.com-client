@@ -17,14 +17,14 @@ stock_columns = [
     colList.Column("earnings_per_share_basic_ttm", "BasicEarningPerShare"),
     colList.Column("dps_common_stock_prim_issue_fy", "Dividend/Share"),
     colList.dividend_yield_ttm,
-    colList.dividenc_yield_fwd
+    colList.dividend_yield_fwd
 ]
 _area_columns = [colList.description_col,
                  colList.Column("market", "Market"),
                  colList.market_cap_col,
                  colList.type_col,
                  colList.base_cur_col,
-                 colList.dividenc_yield_fwd,
+                 colList.dividend_yield_fwd,
                  colList.price_change_col,
                  colList.volume_col,
                  colList.Column("basic_elements", "Stocks")]

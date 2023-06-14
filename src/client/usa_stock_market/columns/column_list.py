@@ -8,5 +8,5 @@ type_col = Column("type")
 description_col = Column("description")
 dividend_yield_ttm = Column(
     "dividends_yield_current", "Dividend yield Mult TTM", True)
-dividenc_yield_fwd = Column("dividends_yield", "Dividend yield Mult FWD", True)
+dividend_yield_fwd = Column("dividends_yield", "Dividend yield Mult FWD", True)
 
