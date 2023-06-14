@@ -1,0 +1,85 @@
+{
+  "totalCount": 129,
+  "data": [
+    {
+      "s": "INDUSTRY_US:COMMERCIAL.SERVICES.ADVERTISING.MARKETING.SERVICES",
+      "d": [
+        "Advertising/Marketing Services",
+        "america",
+        53815523830.6627,
+        "industry",
+        null,
+        "USD",
+        2.89775035,
+        0.72529268,
+        442959.7059306,
+        "Commercial Services",
+        36
+      ]
+    },
+    {
+      "s": "INDUSTRY_US:ELECTRONIC.TECHNOLOGY.AEROSPACE.DEFENSE",
+      "d": [
+        "Aerospace & Defense",
+        "america",
+        949017693474.7642,
+        "industry",
+        null,
+        "USD",
+        1.43704268,
+        0.28460197,
+        747653.83542902,
+        "Electronic Technology",
+        65
+      ]
+    },
+    {
+      "s": "INDUSTRY_US:PROCESS.INDUSTRIES.AGRICULTURAL.COMMODITIES.MILLING",
+      "d": [
+        "Agricultural Commodities/Milling",
+        "america",
+        77999263467.81563,
+        "industry",
+        null,
+        "USD",
+        2.57808323,
+        0.77902604,
+        607323.94660255,
+        "Process Industries",
+        32
+      ]
+    },
+    {
+      "s": "INDUSTRY_US:TRANSPORTATION.AIR.FREIGHT.COURIERS",
+      "d": [
+        "Air Freight/Couriers",
+        "america",
+        269659144135.176,
+        "industry",
+        null,
+        "USD",
+        2.74617106,
+        0.43036191,
+        872739.9065933,
+        "Transportation",
+        19
+      ]
+    },
+    {
+      "s": "INDUSTRY_US:TRANSPORTATION.AIRLINES",
+      "d": [
+        "Airlines",
+        "america",
+        122619351367.90506,
+        "industry",
+        null,
+        "USD",
+        0.46186832,
+        1.51443159,
+        2219693.09072165,
+        "Transportation",
+        22
+      ]
+    }
+  ]
+}
