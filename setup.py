@@ -4,7 +4,7 @@ import setuptools
 import os
 from pathlib import Path
 
-VERSION = "3.0.1"
+VERSION = "4.0.0"
 
 file_path = os.path.join(Path('.'), "requirements.txt")
 with open(file_path) as requirements_txt:
