@@ -50,12 +50,14 @@ all_columns = [
     Column("elements", "Count of industries in element",
            [ColType.SECTOR], "Industries")
 ]
-
-stock_columns = [c for c in all_columns if c.is_allowed_for(ColType.STOCK)]
-industry_columns = [
-    c for c in all_columns if c.is_allowed_for(ColType.INDUSTRY)]
-sector_columns = [c for c in all_columns if c.is_allowed_for(ColType.SECTOR)]
+all_column_dic = {c.tech_name: c for c in all_columns}
+stock_column_dic = {
+    c.tech_name: c for c in all_columns if c.is_allowed_for(ColType.STOCK)}
+industry_column_dic = {
+    c.tech_name: c for c in all_columns if c.is_allowed_for(ColType.INDUSTRY)}
+sector_column_dic = {
+    c.tech_name: c for c in all_columns if c.is_allowed_for(ColType.SECTOR)}
 
 
 def to_df(column_list: List[Column]) -> pd.DataFrame:
-    return pd.DataFrame([c.to_dict() for c in column_list]).sort_values(Column.NAME_DICT_KEY).reset_index(drop=True)
+    return pd.DataFrame([c.to_dict() for c in column_list]).sort_values(Column.OUTPUT_NAME_DICT_KEY).reset_index(drop=True)

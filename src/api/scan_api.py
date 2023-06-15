@@ -3,9 +3,12 @@ import json
 import requests
 from ..exceptions import DoesNotResponseException
 from .symbol_query_types import SymbolQueryTypes
+from .request_context import Filter, Sort, RequestContext
 
 
-def post_scan(columns: List[str], get_top: int = 200, start_top_from: int = 0, top_order: str = "name", top_asc: bool = True, symbol_query_types: SymbolQueryTypes = None, filter: Tuple[SymbolQueryTypes, str] = None) -> Dict:
+def post_scan(columns: List[str],
+              context: RequestContext = RequestContext(),
+              symbol_query_types: SymbolQueryTypes = None) -> Dict:
 
     url = "https://scanner.tradingview.com/america/scan"
 
@@ -16,19 +19,18 @@ def post_scan(columns: List[str], get_top: int = 200, start_top_from: int = 0, t
                 "left": "name",
                 "operation": "nempty"
             },
+            {
+                "left": "typespecs",
+                "operation": "has_none_of",
+                "right": "preferred"
+            }
         ],
         "ignore_unknown_fields": False,
         "options": {
             "lang": "en"
         },
-        "range": [
-            start_top_from,
-            get_top
-        ],
-        "sort": {
-            "sortBy": top_order,
-            "sortOrder": "asc" if top_asc else "desc"
-        },
+        "range": context.range.to_request_dict(),
+        "sort": context.sort.to_request_dict(),
         "markets": [
             "america"
         ]
@@ -44,12 +46,8 @@ def post_scan(columns: List[str], get_top: int = 200, start_top_from: int = 0, t
             "tickers": []
         }
 
-    if filter is not None:
-        json_dict["filter"].append({
-            "left": filter[0].value,
-            "operation": "equal",
-            "right": filter[1]
-        })
+    for filter in context.filters:
+        json_dict["filter"].append(filter.to_request_dict())
 
     payload = json.dumps(json_dict)
 
