@@ -1,6 +1,6 @@
 import unittest
 import logging
-from src.client.usa_stock_market.columns.column import ColType, Column
+from src.client.usa_stock_market.columns import ColType, ColumnInfo,Column
 
 
 class Column_TestCase(unittest.TestCase):
@@ -11,7 +11,8 @@ class Column_TestCase(unittest.TestCase):
 
   def test_WHEN_isAllowedFor_THEN_get_correct_answer(self):
     # Array
-    test_col = Column("test", "test column", [ColType.INDUSTRY, ColType.STOCK])
+    test_col = ColumnInfo(Column.volume, "test column", [
+                          ColType.INDUSTRY, ColType.STOCK])
     # Act
 
     # Assert
@@ -21,11 +22,11 @@ class Column_TestCase(unittest.TestCase):
 
   def test_WHEN_equal_THEN_correct_response(self):
     # Array
-    test1_col = Column("test", "test column", [
+    test1_col = ColumnInfo(Column.volume, "test column", [
                        ColType.INDUSTRY, ColType.STOCK])
-    test2_col = Column("test", "test column", [
+    test2_col = ColumnInfo(Column.volume, "test column", [
                        ColType.INDUSTRY, ColType.STOCK])
-    test3_col = Column("test", "test column", [
+    test3_col = ColumnInfo(Column.volume, "test column", [
                        ColType.INDUSTRY, ColType.SECTOR])
     # Act
 

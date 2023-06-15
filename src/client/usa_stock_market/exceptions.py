@@ -1,5 +1,5 @@
 from typing import List
-from .columns.column_list import Column, ColType
+from .columns import ColumnInfo, ColType
 
 
 class WrongColumnsException(Exception):
