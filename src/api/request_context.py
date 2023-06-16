@@ -86,9 +86,9 @@ class Range:
 
 
 class RequestContext:
-    def __init__(self, range: Range = Range(0, 1000000000), filters: List[Filter] = [], sort: Sort = Sort("name")) -> None:
+    def __init__(self, range: Range = Range(0, 1000000000), filters: List[Filter] = None, sort: Sort = Sort("name")) -> None:
         self.range = range
-        self.filters = filters
+        self.filters = filters if filters is not None else []
         self.sort = sort
 
     def clone(self) -> RequestContext:
