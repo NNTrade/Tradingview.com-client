@@ -4,11 +4,12 @@ import requests
 from ..exceptions import DoesNotResponseException
 from .symbol_query_types import SymbolQueryTypes
 from .request_context import Filter, Sort, RequestContext
-
+from logging import getLogger
 
 def post_scan(columns: List[str],
               context: RequestContext = RequestContext(),
               symbol_query_types: SymbolQueryTypes = None) -> Dict:
+    post_logger = getLogger("post_scan")
 
     url = "https://scanner.tradingview.com/america/scan"
 
@@ -49,12 +50,14 @@ def post_scan(columns: List[str],
     for filter in context.filters:
         json_dict["filter"].append(filter.to_request_dict())
 
+    post_logger.debug("json_dict: %s", json_dict)
     payload = json.dumps(json_dict)
 
     headers = {
         'Content-Type': 'application/json'
     }
 
+    post_logger.debug("Request payload: %s", payload)
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code != 200:
