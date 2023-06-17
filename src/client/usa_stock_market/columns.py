@@ -112,62 +112,16 @@ class Column(Enum):
     price_vs_earnings_per_share = "price_earnings_ttm"
     earnings_per_share = "earnings_per_share_basic_ttm"
     dividend_per_share = "dps_common_stock_prim_issue_fy"
-    market = "market"
+    market_country = "market"
     stocks = "basic_elements"
     sector = "sector"
     industry = "industry"
     cnt_industries = "elements"
+    market = "exchange"
 
     @staticmethod
     def all_column_info() -> List[ColumnInfo]:
-        return [
-            ColumnInfo(Column.metric_cur, "Currency of metrics",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Metric currency"),
-            ColumnInfo(Column.volume, "Trading volume per 1 day",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK],  "Volume / 1D"),
-            ColumnInfo(Column.price_change_per_1d, "Price change in 1 day, 0.01 = 1%",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Price change/1D mult", True),
-            ColumnInfo(Column.market_cap, "Market capitalization",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Market cap"),
-            ColumnInfo(Column.type, "Type of element",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
-            ColumnInfo(Column.description, "Description of element",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
-            ColumnInfo(Column.dividends_yield_current, "Dividend per share / share price, 0.01 = 1%",
-                       [ColType.STOCK], "Dividend yield Mult TTM", True),
-            ColumnInfo(Column.dividends_yield_fwd, "Dividend per share / share price FWD, 0.01 = 1%",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Dividend yield Mult FWD", True),
-            ColumnInfo(Column.price_vs_bookratio, "Price of share / Book ratio of company, 0.01 = 1%",
-                       [ColType.STOCK], "Price/BookRatio"),
-            ColumnInfo(Column.el_name, "Name of element",
-                       [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
-            ColumnInfo(Column.close, "Close price",
-                       [ColType.STOCK]),
-            ColumnInfo(Column.price_dec_len, "Price decimal max lenght",
-                       [ColType.STOCK], "Price decimal Len"),
-            ColumnInfo(Column.currency, "Currency of price",
-                       [ColType.STOCK], "Currency"),
-            ColumnInfo(Column.price_change_abs, "Change of price / 1 day in currency value",
-                       [ColType.STOCK], "Change in Cur / 1D"),
-            ColumnInfo(Column.TradedCap, "Capital traded / 1 day",
-                       [ColType.STOCK],  "Volume * Price / 1D"),
-            ColumnInfo(Column.price_vs_earnings_per_share, "Price / earning per 1 share",
-                       [ColType.STOCK], "Price/EarningPerShare"),
-            ColumnInfo(Column.earnings_per_share, "Earning per 1 share",
-                       [ColType.STOCK], "BasicEarningPerShare"),
-            ColumnInfo(Column.dividend_per_share, "Dividended per share",
-                       [ColType.STOCK], "Dividend/Share"),
-            ColumnInfo(Column.market, "Market of element",
-                       [ColType.INDUSTRY, ColType.SECTOR], "Market"),
-            ColumnInfo(Column.stocks, "Stocks in element",
-                       [ColType.INDUSTRY, ColType.SECTOR], "Stocks"),
-            ColumnInfo(Column.sector, "Sector of element",
-                       [ColType.INDUSTRY, ColType.STOCK], "Sector"),
-            ColumnInfo(Column.industry, "Industry of element",
-                       [ColType.STOCK], "Industry"),
-            ColumnInfo(Column.cnt_industries, "Count of industries in element",
-                       [ColType.SECTOR], "Industries")
-        ]
+        return columns_info
 
     @staticmethod
     def all_column_info_dic() -> Dict[Column, ColumnInfo]:
@@ -222,3 +176,55 @@ class Column(Enum):
 
 def to_df(column_list: List[ColumnInfo]) -> pd.DataFrame:
     return pd.DataFrame([c.to_dict() for c in column_list]).set_index(ColumnInfo.ENUM_DICT_KEY).sort_index()
+
+
+columns_info = [
+    ColumnInfo(Column.metric_cur, "Currency of metrics",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Metric currency"),
+    ColumnInfo(Column.volume, "Trading volume per 1 day",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK],  "Volume / 1D"),
+    ColumnInfo(Column.price_change_per_1d, "Price change in 1 day, 0.01 = 1%",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Price change/1D mult", True),
+    ColumnInfo(Column.market_cap, "Market capitalization",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Market cap"),
+    ColumnInfo(Column.type, "Type of element",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
+    ColumnInfo(Column.description, "Description of element",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
+    ColumnInfo(Column.dividends_yield_current, "Dividend per share / share price, 0.01 = 1%",
+               [ColType.STOCK], "Dividend yield Mult TTM", True),
+    ColumnInfo(Column.dividends_yield_fwd, "Dividend per share / share price FWD, 0.01 = 1%",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK], "Dividend yield Mult FWD", True),
+    ColumnInfo(Column.price_vs_bookratio, "Price of share / Book ratio of company, 0.01 = 1%",
+               [ColType.STOCK], "Price/BookRatio"),
+    ColumnInfo(Column.el_name, "Name of element",
+               [ColType.INDUSTRY, ColType.SECTOR, ColType.STOCK]),
+    ColumnInfo(Column.close, "Close price",
+               [ColType.STOCK]),
+    ColumnInfo(Column.price_dec_len, "Price decimal max lenght",
+               [ColType.STOCK], "Price decimal Len"),
+    ColumnInfo(Column.currency, "Currency of price",
+               [ColType.STOCK], "Currency"),
+    ColumnInfo(Column.price_change_abs, "Change of price / 1 day in currency value",
+               [ColType.STOCK], "Change in Cur / 1D"),
+    ColumnInfo(Column.TradedCap, "Capital traded / 1 day",
+               [ColType.STOCK],  "Volume * Price / 1D"),
+    ColumnInfo(Column.price_vs_earnings_per_share, "Price / earning per 1 share",
+               [ColType.STOCK], "Price/EarningPerShare"),
+    ColumnInfo(Column.earnings_per_share, "Earning per 1 share",
+               [ColType.STOCK], "BasicEarningPerShare"),
+    ColumnInfo(Column.dividend_per_share, "Dividended per share",
+               [ColType.STOCK], "Dividend/Share"),
+    ColumnInfo(Column.market_country, "Market country of element",
+               [ColType.INDUSTRY, ColType.SECTOR], "Market country"),
+    ColumnInfo(Column.stocks, "Stocks in element",
+               [ColType.INDUSTRY, ColType.SECTOR], "Stocks"),
+    ColumnInfo(Column.sector, "Sector of element",
+               [ColType.INDUSTRY, ColType.STOCK], "Sector"),
+    ColumnInfo(Column.industry, "Industry of element",
+               [ColType.STOCK], "Industry"),
+    ColumnInfo(Column.cnt_industries, "Count of industries in element",
+               [ColType.SECTOR], "Industries"),
+    ColumnInfo(Column.market, "Market of stock trading",
+               [ColType.STOCK], output="Market")
+]
