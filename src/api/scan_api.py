@@ -11,7 +11,7 @@ def post_scan(columns: List[str],
               symbol_query_types: SymbolQueryTypes = None) -> Dict:
     post_logger = getLogger("post_scan")
 
-    url = "https://scanner.tradingview.com/america/scan"
+    url = f"https://scanner.tradingview.com/{context.market.value}/scan"
 
     json_dict = {
         "columns": columns,
@@ -33,7 +33,7 @@ def post_scan(columns: List[str],
         "range": context.range.to_request_dict(),
         "sort": context.sort.to_request_dict(),
         "markets": [
-            "america"
+            context.market.value
         ]
     }
 

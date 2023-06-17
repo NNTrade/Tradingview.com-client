@@ -85,14 +85,19 @@ class Range:
         return Range(self.from_idx, self.till_idx)
 
 
+class MarketEnum(Enum):
+    america = "america"
+    russia = "russia"
+
 class RequestContext:
-    def __init__(self, range: Range = Range(0, 1000000000), filters: List[Filter] = None, sort: Sort = Sort("name")) -> None:
+    def __init__(self, range: Range = Range(0, 1000000000), filters: List[Filter] = None, sort: Sort = Sort("name"), market: MarketEnum = MarketEnum.america) -> None:
         self.range = range
         self.filters = filters if filters is not None else []
         self.sort = sort
+        self.market = market
 
     def clone(self) -> RequestContext:
-        return RequestContext(self.range.clone(), [f.clone() for f in self.filters], self.sort.clone())
+        return RequestContext(self.range.clone(), [f.clone() for f in self.filters], self.sort.clone(), self.market)
 
     def set_filters(self, filters: List[Filter]) -> RequestContext:
         self.filters = filters
@@ -108,4 +113,8 @@ class RequestContext:
 
     def set_range(self, range: Range) -> RequestContext:
         self.range = range
+        return self
+
+    def set_market(self, market:MarketEnum)->RequestContext:
+        self.market = market
         return self
