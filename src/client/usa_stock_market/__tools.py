@@ -1,7 +1,7 @@
 import pandas as pd
 from ...api.scan_api import Dict
 from ...parser.scan_json_parser import scan_json_parse
-from ...parser.number_parser import convert_percent_to_mult
+from ...parser.number_parser import convert_df_with_percent_into_df_of_mult
 from typing import List
 from .columns import ColumnInfo, ColType, Column
 from .exceptions import WrongColumnsException
@@ -19,7 +19,8 @@ def parse_json(cols: List[Column], response_json: Dict) -> Response:
         if column_info.needPercentConvert:
             pers_col.append(c.value)
         rename[c.value] = column_info.output_name
-    _ret_df[pers_col] = convert_percent_to_mult(_ret_df[pers_col])
+    _ret_df[pers_col] = convert_df_with_percent_into_df_of_mult(
+        _ret_df[pers_col])
 
     _ret_df.rename(columns=rename, inplace=True)
 
