@@ -38,6 +38,10 @@ class Filter:
         self.value = value
         return self
 
+    @staticmethod
+    def EQ(field: str, value: any) -> Filter:
+        return Filter(field, Filter.CompareFunc.eq, value)
+
 
 class Sort:
     def __init__(self, field: str, is_asc: bool = True) -> None:
@@ -89,8 +93,9 @@ class MarketEnum(Enum):
     america = "america"
     russia = "russia"
 
+
 class RequestContext:
-    def __init__(self, range: Range = Range(0, 1000000000), filters: List[Filter] = None, sort: Sort = Sort("name"), market: MarketEnum = MarketEnum.america) -> None:
+    def __init__(self, range: Range = Range(0, 100), filters: List[Filter] = None, sort: Sort = Sort("name"), market: MarketEnum = MarketEnum.america) -> None:
         self.range = range
         self.filters = filters if filters is not None else []
         self.sort = sort
@@ -115,6 +120,6 @@ class RequestContext:
         self.range = range
         return self
 
-    def set_market(self, market:MarketEnum)->RequestContext:
+    def set_market(self, market: MarketEnum) -> RequestContext:
         self.market = market
         return self

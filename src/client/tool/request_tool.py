@@ -1,10 +1,11 @@
 import pandas as pd
+
+from ..columns import ColumnInfo, ColumnType, Column
 from ...api.scan_api import Dict
 from ...parser.scan_json_parser import scan_json_parse
 from ...parser.number_parser import convert_df_with_percent_into_df_of_mult
 from typing import List
-from .columns import ColumnInfo, ColType, Column
-from .exceptions import WrongColumnsException
+from ..columns.exceptions import WrongColumnsException
 from .response import Response
 from ...api.request_context import RequestContext
 
@@ -27,7 +28,7 @@ def parse_json(cols: List[Column], response_json: Dict) -> Response:
     return Response(int(response_json["totalCount"]), _ret_df)
 
 
-def check_columns(request_context: RequestContext, columns: List[Column], checkedType: ColType):
+def check_columns(request_context: RequestContext, columns: List[Column], checkedType: ColumnType):
     all_col_dict = Column.all_column_info_dic()
     wrong_col = []
     for c in columns:
@@ -42,7 +43,7 @@ def check_columns(request_context: RequestContext, columns: List[Column], checke
         raise WrongColumnsException(wrong_col, checkedType)
 
 
-def __check_str_field(wrong_col: List[str], field: str, all_col_dict: Dict[Column, ColumnInfo], checkedType: ColType):
+def __check_str_field(wrong_col: List[str], field: str, all_col_dict: Dict[Column, ColumnInfo], checkedType: ColumnType):
     try:
         col = all_col_dict.get(Column(field))
 

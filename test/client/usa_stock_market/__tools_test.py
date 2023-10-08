@@ -1,6 +1,7 @@
 import unittest
 import logging
-from src.client.usa_stock_market.__tools import check_columns, ColType, RequestContext, WrongColumnsException, Column
+from src.client.columns.column_type import ColumnType
+from src.client.tool.request_tool import check_columns, RequestContext, WrongColumnsException, Column
 from src.api.request_context import Filter, Sort
 
 
@@ -15,7 +16,7 @@ class CheckColumns_TestCase(unittest.TestCase):
 
         # Act
         check_columns(RequestContext(filters=[Filter("type", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("volume")), [
-                      Column.el_name, Column.stocks, Column.market_cap], ColType.SECTOR)
+                      Column.el_name, Column.stocks, Column.market_cap], ColumnType.SECTOR)
         # Assert
 
     def test_WHEN_give_incorrect_columns_THEN_no_errors(self):
@@ -26,19 +27,19 @@ class CheckColumns_TestCase(unittest.TestCase):
         # Assert
         with self.assertRaises(WrongColumnsException) as context:
             check_columns(RequestContext(filters=[Filter("type", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("volume")), [
-                Column.el_name, Column.dividend_per_share, Column.market_cap], ColType.SECTOR)
+                Column.el_name, Column.dividend_per_share, Column.market_cap], ColumnType.SECTOR)
 
         with self.assertRaises(WrongColumnsException) as context:
             check_columns(RequestContext(filters=[Filter("dps_common_stock_prim_issue_fy", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("volume")), [
-                Column.el_name, Column.stocks, Column.market_cap], ColType.SECTOR)
+                Column.el_name, Column.stocks, Column.market_cap], ColumnType.SECTOR)
 
         with self.assertRaises(WrongColumnsException) as context:
             check_columns(RequestContext(filters=[Filter("typesss", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("volume")), [
-                Column.el_name, Column.stocks, Column.market_cap], ColType.SECTOR)
+                Column.el_name, Column.stocks, Column.market_cap], ColumnType.SECTOR)
 
         with self.assertRaises(WrongColumnsException) as context:
             check_columns(RequestContext(filters=[Filter("type", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("dps_common_stock_prim_issue_fy")), [
-                Column.el_name, Column.stocks, Column.market_cap], ColType.SECTOR)
+                Column.el_name, Column.stocks, Column.market_cap], ColumnType.SECTOR)
         with self.assertRaises(WrongColumnsException) as context:
             check_columns(RequestContext(filters=[Filter("type", Filter.CompareFunc.eq, "eoue"), Filter("market_cap_basic", Filter.CompareFunc.eq, 2323)], sort=Sort("volumess")), [
-                Column.el_name, Column.stocks, Column.market_cap], ColType.SECTOR)
+                Column.el_name, Column.stocks, Column.market_cap], ColumnType.SECTOR)
