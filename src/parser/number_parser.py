@@ -31,8 +31,8 @@ def is_hyphen(last_char):
     return last_char == "−" or last_char == "-" or last_char == "—"
 
 
-def convert_df_with_percent_into_df_of_mult(df: pd.DataFrame) -> pd.DataFrame:
-  return df.applymap(convert_percent_to_mult)
+def convert_df_with_percent_into_df_of_mult(sr: pd.Series) -> pd.Series:
+  return sr.map(convert_percent_to_mult)
 
 
 def convert_percent_to_mult(el):
