@@ -1,7 +1,7 @@
-from src.api.scan_api import RequestContext, SymbolQueryTypes, post_scan, Filter
-from src.client.columns.column_type import ColumnType
-from src.client.columns.columns import Column, List
-from src.client.tool.request_tool import Response, check_columns, parse_json
+from ...api.scan_api import RequestContext, SymbolQueryTypes, post_scan, Filter
+from ..columns.column_type import ColumnType
+from ..columns.columns import Column, List
+from ..tool.request_tool import Response, check_columns, parse_json
 
 
 def get_sectors_overview(columns: List[Column] = list(Column.column_dic_for(ColumnType.SECTOR).keys()), request_context: RequestContext = RequestContext()) -> Response:
